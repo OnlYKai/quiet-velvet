@@ -1,7 +1,7 @@
-import keys from './config.js';
+import config from './config.js';
 
 const updateAccessToken = async () => {
-    if (!keys.spotifyRefreshToken || !keys.spotifyClientId || !keys.spotifyClientSecret) {
+    if (!config.spotifyRefreshToken || !config.spotifyClientId || !config.spotifyClientSecret) {
         console.error("Missing required keys for refreshing access token");
         return;
     }
@@ -13,9 +13,9 @@ const updateAccessToken = async () => {
         },
         body: new URLSearchParams({
             grant_type: 'refresh_token',
-            refresh_token: keys.spotifyRefreshToken,
-            client_id: keys.spotifyClientId,
-            client_secret: keys.spotifyClientSecret,
+            refresh_token: config.spotifyRefreshToken,
+            client_id: config.spotifyClientId,
+            client_secret: config.spotifyClientSecret,
         }).toString(),
     };
 
@@ -184,9 +184,59 @@ const playPause = async () => {
 }
 
 
+
+const getCurrentSongLocal = async (bypass) => {
+    try {
+        const response = await fetch(bypass ? 'http://localhost:5000/requestMediaBypass' : 'http://localhost:5000/requestMedia');
+
+        if (!response.ok)
+            return 'ERR: bad response';
+
+        const data = await response.json();
+
+        return `${data.title} - ${data.artist}`;
+    }
+    catch (e) {
+        return 'ERR: failed to connect'
+    }
+}
+
+async function sendCommand(action) {
+    try {
+        const response = await fetch('http://localhost:5000/controlMedia', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({ action }),
+        });
+
+        if (!response.ok)
+            throw new Error('bad response while sending command');
+
+        const result = await response.json();
+
+        console.log('Command sent successfully: ' + result);
+    }
+    catch (e) {
+        console.error('Error sending command: ' + e);
+    }
+}
+
+
+
+const favorite = async (setIsFavorite) => {
+    setIsFavorite((prev) => !prev);
+}
+
+
+
 export {
     getCurrentSong,
     skipSong,
     previousSong,
-    playPause
+    playPause,
+    getCurrentSongLocal,
+    sendCommand,
+    favorite
 };

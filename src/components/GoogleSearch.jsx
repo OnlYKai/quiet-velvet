@@ -1,4 +1,4 @@
-const GoogleSearch = ({ commandRunner, explorerPath }) => {
+const GoogleSearch = ({ commandRunner, browserPath }) => {
     const style = {
         justifyContent: 'space-between',
     }
@@ -12,8 +12,7 @@ const GoogleSearch = ({ commandRunner, explorerPath }) => {
         e.preventDefault();
         const research = e.target[0].value;
         e.target[0].value = '';
-        commandRunner(`focus --workspace 3`);
-        commandRunner(`shell-exec ${explorerPath} https://www.google.com/search?q=${research.replaceAll(' ', '+')}`);
+        commandRunner(`shell-exec ${browserPath} https://www.google.com/search?q=${research.replaceAll(' ', '+')}`);
     }
     return (
         <form className="logo box" style={style} onSubmit={(e) => onSubmit(e)}>

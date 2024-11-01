@@ -18,6 +18,9 @@
 i {
     color: var(--main-color);
     margin-right: 7px;
+    font-size: 13px;
+    padding-top: 0px;
+    padding-bottom: 0px;
 }
 
 body {
@@ -43,7 +46,7 @@ body,
     grid-template-columns: 1fr 1fr 1fr;
     align-items: center;
     height: 100%;
-    padding: 4px 1.5vw;
+    padding: 3px 10px;
     white-space: nowrap;
 }
 
@@ -70,7 +73,7 @@ body,
 .memory,
 .cpu,
 .battery {
-    margin-right: 20px !important;
+    margin-right: 7px !important;
     display: flex;
     align-items: center;
     color: var(--font-color);
@@ -135,7 +138,7 @@ body,
 .box {
     background: var(--background-color);
     border: 2px solid var(--main-color);
-    padding: 0.5em 1em;
+    padding: 0.5em 0.7em;
     border-radius: 1em;
     display: flex;
     align-items: center;
@@ -146,10 +149,11 @@ body,
 .network-item {
     display: flex;
     align-items: center;
-    font-size: 10px;
+    font-size: 13px;
 }
 
 .network {
+    margin-right: 0px !important;
     gap: 0.5em;
 }
 
@@ -180,6 +184,7 @@ body,
 .clean-button {
     background-color: transparent;
     border: none;
+    padding: 0.2em;
     cursor: pointer;
     color: var(--font-color);
 }
@@ -198,5 +203,47 @@ body,
     &:hover {
         background: var(--main-color);
         transform: scale(0.9);
+    }
+}
+
+
+
+.separator-button {
+    background-color: transparent;
+    border: none;
+    padding: 0.0em 0.5em;
+    color: var(--font-color);
+}
+
+.spotify-container {
+    display: flex;
+}
+
+.marquee-container-large {
+    display: flex;
+    align-items: center;
+    max-width: 20em;
+    overflow: hidden;
+}
+
+.marquee-container-small {
+    display: flex;
+    align-items: center;
+    max-width: 15em;
+    overflow: hidden;
+}
+
+.marquee {
+    display: inline-block;
+    white-space: pre;
+    animation: marquee 10s linear infinite;
+}
+
+@keyframes marquee {
+    0% {
+        transform: translateX(0%);  /* Start position */
+    }
+    100% {
+        transform: translateX(-50%); /* End position */
     }
 }
