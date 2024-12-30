@@ -1,54 +1,106 @@
-/**
+/*
  * Import the Nerdfonts icon font.
  * Ref https://www.nerdfonts.com/cheat-sheet for a cheatsheet of available Nerdfonts icons.
  */
-@import "https://www.nerdfonts.com/assets/css/webfont.css";
+@import 'https://www.nerdfonts.com/assets/css/webfont.css';
+
+@font-face {
+    font-family: 'CaskaydiaMonoNerdFont Locally';
+    src: url('./CaskaydiaMonoNerdFont-Regular.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+
+
+
+/* Total height is 30+top-gap */
+
+/* SETTINGS START */
+:root {
+    --top-gap: 1px;
+    --side-gap: 5px;
+
+    --main-color: rgb(52, 52, 116); /* Default: rgba(122, 80, 229, 0.95); */ /* New: rgb(76, 44, 158); */
+    --background-color: linear-gradient(rgba(0, 0, 0, 0.90), rgba(14, 2, 20, 0.85)); /* for the boxes */
+
+    --font-color: rgb(255, 255, 255); /* Default: rgba(255, 255, 255, 0.9); */
+
+    --roundness: 1.25rem; /* Between 0 and 1.25 rem (or 0-15px) */
+    --google-roundness: 1rem; /* Between 0 and 1.25 rem (or 0-15px) */
+}
+/* SETTINGS END */
+
+
+
+
 
 :root {
-    --main-color: rgba(122, 80, 229, 0.95);
-    --background-color: linear-gradient(rgba(0, 0, 0, 0.90), rgba(14, 2, 20, 0.85));
-    --font-color: rgba(255, 255, 255, 0.9);
-    user-select: none;
+    --font-size: 12px;
+    user-select: none; /* Disable text selecting */
 }
+
+button:focus {
+    outline: none; /* Remove the focused outline */
+}
+
+
 
 ::placeholder {
     color: rgb(255 255 255 / 60%);
 }
 
-i {
-    color: var(--main-color);
-    margin-right: 7px;
-    font-size: 13px;
-    padding-top: 0px;
-    padding-bottom: 0px;
+
+
+html {
+    height: 100%;
+    font-size: var(--font-size);
 }
 
 body {
+    height: 100%;
     color: var(--font-color);
-    font-family: "FiraCode Nerd Font", monospace;
-    font-size: 12px;
+    font-family: 'CaskaydiaMonoNerdFont Locally', ui-monospace, monospace;
     overflow: hidden;
 }
 
-html,
-body,
 #root {
     height: 100%;
-}
-
-#root {
     background: transparent;
 }
 
 
+
+i {
+    color: var(--main-color);
+    margin-right: 5px;
+}
+
+a {
+    text-decoration: none;
+    color: var(--font-color);
+}
+
+input {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: var(--font-color);
+}
+
+
+
+/* FOUNDATION */
+
 .app {
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    align-items: center;
-    height: 100%;
-    padding: 3px 10px;
+    align-items: end;
+    height: 31px;
+    padding: var(--top-gap) var(--side-gap) 0;
     white-space: nowrap;
 }
+
+
 
 .left,
 .center,
@@ -65,112 +117,154 @@ body,
     justify-self: end;
 }
 
-.keyboard,
-.logo,
-.binding-mode,
-.tiling-direction,
-.network,
-.memory,
-.cpu,
-.battery {
-    margin-right: 7px !important;
+
+
+/* GENERAL */
+
+.transparent-button {
     display: flex;
     align-items: center;
-    color: var(--font-color);
-}
-
-.workspaces {
-    display: flex;
-    align-items: center;
-}
-
-.workspace {
-    background: rgb(255 255 255 / 5%);
-    margin-right: 4px;
-    padding: 3px 8px;
-    color: var(--font-color);
+    background-color: transparent;
     border: none;
-    border-radius: 2px;
     cursor: pointer;
-    transition: all 0.3s, transform 0.3s;
-
-    &.displayed {
-        background: rgb(255 255 255 / 15%) !important;
-    }
-
-    &.focused,
-    &:hover {
-        background: var(--main-color);
-        transform: scale(0.9);
-    }
-}
-
-.binding-mode,
-.tiling-direction {
-    background: rgb(255 255 255 / 15%);
     color: var(--font-color);
-    border-radius: 2px;
-    line-height: 1;
-    padding: 4px 8px;
-    border: 0;
-    cursor: pointer;
+    padding: 0 2px;
+
+    &.heart {
+        padding: 0;
+    }
 }
 
-.binding-mode {
-    margin-right: 4px;
-}
 
-.cpu .high-usage {
-    color: #900029;
-}
-
-.battery {
-    position: relative;
-}
-
-.battery .charging-icon {
-    position: absolute;
-    font-size: 7px;
-    left: -8px;
-    top: 3px;
-}
 
 .box {
+    display: flex;
+    align-items: center;
     background: var(--background-color);
     border: 2px solid var(--main-color);
-    padding: 0.5em 0.7em;
-    border-radius: 1em;
-    display: flex;
-    align-items: center;
-    backdrop-filter: invert(1);
-    transition: all 0.3s, transform 0.3s;
+    border-radius: var(--roundness);
+    box-sizing: border-box;
+    padding: 0 7px;
+    height: 30px;
+    gap: 7px;
+    
+    &.in-box {
+        background-color: transparent;
+        gap: 0;
+    }
+    
+    &.google {
+        border-radius: var(--google-roundness);
+        gap: 0;
+        margin-right: 5px;
+    }
 }
 
-.network-item {
+
+
+.flex-container {
     display: flex;
     align-items: center;
-    font-size: 13px;
 }
 
-.network {
-    margin-right: 0px !important;
-    gap: 0.5em;
+.flex-container-gap {
+    display: flex;
+    align-items: center;
+    gap: 3px;
 }
+
+
+
+.icon-small,
+.icon-large {
+    padding-top: 0;
+    padding-bottom: 0;
+    margin-top: -1px;
+    margin-bottom: 0;
+
+    &.bold {
+        font-weight: 600;
+    }
+}
+
+.icon-small {
+    font-size: 15px;
+
+    &.weather {
+        font-size: 20px;
+    }
+}
+
+.icon-large {
+    font-size: 16px;
+}
+
+
+
+.lh-default {
+    line-height: var(--font-size);
+}
+
+.lh-small {
+    line-height: 15px;
+}
+
+.lh-large {
+    line-height: 16px;
+}
+
+
+
+/* LEFT */
+
+.workspace {
+    display: flex;
+    align-items: center;
+    line-height: 14px;
+    background: rgb(255 255 255 / 10%);
+    color: var(--font-color);
+    padding: 1px 8px;
+    border: 2px solid rgb(255 255 255 / 0%);
+    border-radius: 4px;
+    cursor: pointer;
+    transition: scale 0.3s, transform 0.3s;
+
+    &.displayed {
+        background: rgb(255 255 255 / 10%) !important;
+        border: 2px solid rgb(255 255 255 / 10%);
+    }
+
+    &.focused {
+        border: 2px solid var(--main-color);
+    }
+
+    &:hover {
+        background: var(--main-color);
+        border: 2px solid var(--main-color);
+        transform: scale(0.9);
+    }
+
+    &.displayed:hover {
+        transform: scale(0.95);
+    }
+
+    &.focused:hover {
+        transform: none;
+    }
+}
+
+
 
 .shortcut {
     background: var(--background-color);
-    padding: 5px 8px;
     color: var(--font-color);
-    border: 2px solid var(--main-color) !important;
+    padding: 4px 6px;
+    border: 2px solid var(--main-color);
     border-radius: 2px;
     cursor: pointer;
-    transition: all 0.3s, transform 0.3s;
+    transition: scale 0.3s, transform 0.3s;
+    font-size: 9px;
 
-    &.displayed {
-        background: rgb(255 255 255 / 15%);
-    }
-
-    &.focused,
     &:hover {
         background: var(--main-color);
         transform: scale(0.9);
@@ -181,55 +275,21 @@ body,
     color: var(--font-color);
 }
 
-.clean-button {
-    background-color: transparent;
-    border: none;
-    padding: 0.2em;
-    cursor: pointer;
-    color: var(--font-color);
-}
-
-.settings {
-    background: rgb(255 255 255 / 15%);
-    margin-right: 4px;
-    padding: 3px 8px;
-    color: var(--font-color);
-    border: none;
-    border-radius: 2px;
-    cursor: pointer;
-    transition: all 0.3s, transform 0.3s;
-
-    &.focused,
-    &:hover {
-        background: var(--main-color);
-        transform: scale(0.9);
-    }
-}
 
 
-
-.separator-button {
-    background-color: transparent;
-    border: none;
-    padding: 0.0em 0.5em;
-    color: var(--font-color);
-}
-
-.spotify-container {
-    display: flex;
-}
+/* CENTER */
 
 .marquee-container-large {
     display: flex;
     align-items: center;
-    max-width: 20em;
+    max-width: 300px;
     overflow: hidden;
 }
-
+/* max amount of characters are max-width/7 rounded down */
 .marquee-container-small {
     display: flex;
     align-items: center;
-    max-width: 15em;
+    max-width: 200px;
     overflow: hidden;
 }
 
@@ -241,9 +301,39 @@ body,
 
 @keyframes marquee {
     0% {
-        transform: translateX(0%);  /* Start position */
+        transform: translateX(0%); /* Start position */
     }
     100% {
         transform: translateX(-50%); /* End position */
     }
+}
+
+
+
+/* RIGHT */
+
+.binding-mode,
+.tiling-direction {
+    display: flex;
+    align-items: center;
+    line-height: 14px;
+    background: rgb(255 255 255 / 10%);
+    color: var(--font-color);
+    padding: 1px 5px 1px 6px;
+    border: 2px solid rgb(255 255 255 / 0%);
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+.binding-mode {
+    cursor: default;
+}
+
+
+
+.network-values {
+    display: flex;
+    flex-direction: column;
+    font-size: 10px;
+    line-height: 10px;
 }

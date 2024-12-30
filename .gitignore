@@ -5,3 +5,5 @@
 .vscode/
 
 package-lock.json
+/API/exe/
+/API/.cache

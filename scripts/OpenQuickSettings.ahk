@@ -1,0 +1,2 @@
+#NoTrayIcon
+Send #{a}
